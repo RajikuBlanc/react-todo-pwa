@@ -50,7 +50,10 @@ const Header = () => {
 
 const CustomButton = styled(Button)({
   color: 'white',
-  border: 'none'
+  border: '1px solid white',
+  '&:hover': {
+    backgroundColor: 'rgba(255,255,255,0.3)'
+  }
 });
 
 export default Header;

@@ -8,6 +8,7 @@ import {
   orderBy,
   doc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -43,4 +44,12 @@ export const addTodo = (content, uid) => {
 
 export const todoDelete = (id) => {
   deleteDoc(doc(db, "todo", id));
+};
+
+export const toggleComplete = async (id) => {
+  const todo = doc(db, "todo", id);
+  console.log(todo);
+  await updateDoc(todo, {
+    isComplete: true,
+  });
 };
