@@ -9,8 +9,8 @@ const ToDoList = ({ todos, fetch }) => {
     Api.todoDelete(id);
     fetch();
   };
-  const checkHandle = id => {
-    Api.toggleComplete(id);
+  const checkHandle = async id => {
+    await Api.toggleComplete(id);
     fetch();
   };
 
@@ -24,7 +24,7 @@ const ToDoList = ({ todos, fetch }) => {
           </IconButton>
         }
       >
-        <Checkbox onClick={() => checkHandle(todo.id)} />
+        <Checkbox checked={todo.isComplete} onClick={() => checkHandle(todo.id)} />
         <ListItemText primary={todo.content} />
       </ListItemStyle>
     );

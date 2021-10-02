@@ -9,6 +9,7 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -47,9 +48,17 @@ export const todoDelete = (id) => {
 };
 
 export const toggleComplete = async (id) => {
-  const todo = doc(db, "todo", id);
-  console.log(todo);
-  await updateDoc(todo, {
-    isComplete: true,
-  });
+  const todo = await doc(db, "todo", id);
+  const todoData = await getDoc(todo);
+  if (todoData.data().isComplete) {
+    await updateDoc(todo, {
+      isComplete: false,
+    });
+    return false;
+  } else {
+    await updateDoc(todo, {
+      isComplete: true,
+    });
+    return true;
+  }
 };
