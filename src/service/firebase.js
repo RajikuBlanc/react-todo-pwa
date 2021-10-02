@@ -6,9 +6,8 @@ import {
   GithubAuthProvider,
   signOut,
 } from "firebase/auth";
-import "firebase/compat/firestore";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
 // firebaseの初期化
 export const firebaseApp = initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -26,6 +25,7 @@ const githubprovider = new GithubAuthProvider();
 
 export const auth = getAuth();
 export const db = getFirestore();
+enableIndexedDbPersistence(db);
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, googleProvider)
